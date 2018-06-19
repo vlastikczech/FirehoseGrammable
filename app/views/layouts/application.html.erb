@@ -6,16 +6,33 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,100,300,600,700' rel='stylesheet' type='text/css'>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   </head>
+  <body>
 
+  <div class="top-nav">
+    <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+      <div class="brand float-left">
+        Grammable
+      </div>
+      <div class="add float-right">
+        <% if current_user %>
+          Welcome, <%= current_user.email %>.
+          <%= link_to "New Post", new_gram_path %>
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to "Log In", new_user_session_path , class: 'my-login-btn ' %>
+          <%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
+      </div>
 
-  <% if current_user %>
-    You're signed in as <%= current_user.email %>/
-  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign In", new_user_session_path %>
-    <%= link_to "Sign Up", new_user_registration_path %>
-  <% end %>
+    </div>
+    <br class="clear-fix" />
+  </div>
+
   <% if notice.present? %>
     <p class="notice"><%= notice %></p>
   <% end %>
@@ -24,10 +41,10 @@
     <p class="alert"><%= alert %></p>
   <% end %>
 
-  <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
 
   <%= yield %>
+
+
+
   </body>
 </html>
